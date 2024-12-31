@@ -4,6 +4,7 @@ import { useRequestQuery } from '../useQueryRequest';
 import { transformPagination } from '@/utils';
 import useApiRequest from '../useRequest';
 import t from './types';
+import { useRequestPdf } from '../useRequestPdf';
 
 const commonInvalidateQueries = (queryClient) => {
   // Invalidate bills.
@@ -213,4 +214,13 @@ export function useBillPaymentTransactions(id, props) {
       ...props,
     },
   );
+}
+
+/**
+ * Retrieve the bill pdf document data.
+ */
+export function usePdfBill(id) {
+  return useRequestPdf({
+    url: `purchases/bills/${id}`,
+  });
 }

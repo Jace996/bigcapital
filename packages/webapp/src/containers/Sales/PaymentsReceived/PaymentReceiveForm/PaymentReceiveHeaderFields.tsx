@@ -21,6 +21,7 @@ import {
   FMoneyInputGroup,
   Stack,
   FDateInput,
+  FInputGroup,
 } from '@/components';
 import { safeSumBy } from '@/utils';
 import {
@@ -209,14 +210,9 @@ export default function PaymentReceiveHeaderFields() {
         />
       </FFormGroup>
 
-      {/* ------------ Reference No. ------------ */}
-      <FFormGroup
-        name={'reference_no'}
-        label={<T id={'reference'} />}
-        inline
-        fastField
-      >
-        <InputGroup name={'reference_no'} minimal fastField />
+      {/* ----------- Reference ----------- */}
+      <FFormGroup name={'reference_no'} label={<T id={'reference'} />} inline>
+        <FInputGroup name={'reference_no'} minimal={true} />
       </FFormGroup>
 
       {/*------------ Project name -----------*/}

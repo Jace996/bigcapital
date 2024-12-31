@@ -28,6 +28,8 @@ export const ERRORS = {
 // Default payment made entry values.
 export const defaultPaymentMadeEntry = {
   bill_id: '',
+  bill_no: '',
+  date: moment(new Date()).format('YYYY-MM-DD'),
   payment_amount: '',
   currency_code: '',
   id: null,
@@ -49,6 +51,7 @@ export const defaultPaymentMade = {
   exchange_rate: 1,
   entries: [],
   attachments: [],
+  pdf_template_id: '',
 };
 
 export const transformToEditForm = (paymentMade, paymentMadeEntries) => {

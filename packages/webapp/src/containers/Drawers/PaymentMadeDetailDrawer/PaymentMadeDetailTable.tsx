@@ -17,7 +17,7 @@ export default function PaymentMadeDetailTable() {
 
   // Payment made details context.
   const { paymentMade } = usePaymentMadeDetailContext();
-
+  console.log(paymentMade.entries);
   return (
     <CommercialDocEntriesTable
       columns={columns}

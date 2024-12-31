@@ -384,6 +384,9 @@ export interface InvoicePdfTemplateAttributes {
   statementLabel: string;
   showStatement: boolean;
   statement: string;
+  reference: string;
+  referenceLabel: string;
+  billedFromLabel: string;
 }
 
 export interface ISaleInvocieState {

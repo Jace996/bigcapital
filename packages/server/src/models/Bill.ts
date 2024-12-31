@@ -459,6 +459,7 @@ export default class Bill extends mixin(TenantModel, [
     const TaxRateTransaction = require('models/TaxRateTransaction');
     const Document = require('models/Document');
     const { MatchedBankTransaction } = require('models/MatchedBankTransaction');
+    const { PdfTemplate } = require('models/PdfTemplate');
 
     return {
       vendor: {
@@ -565,6 +566,18 @@ export default class Bill extends mixin(TenantModel, [
         },
         filter(query) {
           query.where('reference_type', 'Bill');
+        },
+      },
+
+       /**
+       * Bill may belongs to pdf branding template.
+       */
+       pdfTemplate: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: PdfTemplate,
+        join: {
+          from: 'bills.pdfTemplateId',
+          to: 'pdf_templates.id',
         },
       },
     };

@@ -10,6 +10,7 @@ import QuickPaymentReceiveFormDialog from '@/containers/Dialogs/QuickPaymentRece
 import QuickPaymentMadeFormDialog from '@/containers/Dialogs/QuickPaymentMadeFormDialog';
 import AllocateLandedCostDialog from '@/containers/Dialogs/AllocateLandedCostDialog';
 import InvoicePdfPreviewDialog from '@/containers/Dialogs/InvoicePdfPreviewDialog';
+import BillPdfPreviewDialog from '@/containers/Dialogs/BillPdfPreviewDialog';
 import EstimatePdfPreviewDialog from '@/containers/Dialogs/EstimatePdfPreviewDialog';
 import MoneyInDialog from '@/containers/CashFlow/MoneyInDialog';
 import MoneyOutDialog from '@/containers/CashFlow/MoneyOutDialog';
@@ -28,6 +29,7 @@ import UnlockingTransactionsDialog from '@/containers/Dialogs/UnlockingTransacti
 import UnlockingPartialTransactionsDialog from '@/containers/Dialogs/UnlockingPartialTransactionsDialog';
 import CreditNotePdfPreviewDialog from '@/containers/Dialogs/CreditNotePdfPreviewDialog';
 import PaymentReceivePdfPreviewDialog from '@/containers/Dialogs/PaymentReceivePdfPreviewDialog';
+import BillPaymentPdfPreviewDialog from '@/containers/Dialogs/BillPaymentPdfPreviewDialog';
 import WarehouseFormDialog from '@/containers/Dialogs/WarehouseFormDialog';
 import BranchFormDialog from '@/containers/Dialogs/BranchFormDialog';
 import BranchActivateDialog from '@/containers/Dialogs/BranchActivateDialog';
@@ -76,6 +78,7 @@ export default function DialogsContainer() {
         dialogName={DialogsName.AllocateLandedCostForm}
       />
       <InvoicePdfPreviewDialog dialogName={DialogsName.InvoicePdfForm} />
+      <BillPdfPreviewDialog dialogName={DialogsName.BillPdfForm} />
       <EstimatePdfPreviewDialog dialogName={DialogsName.EstimatePdfForm} />
       <MoneyInDialog dialogName={DialogsName.MoneyInForm} />
       <MoneyOutDialog dialogName={DialogsName.MoneyOutForm} />
@@ -109,6 +112,7 @@ export default function DialogsContainer() {
       />
       <CreditNotePdfPreviewDialog dialogName={DialogsName.CreditNotePdfForm} />
       <PaymentReceivePdfPreviewDialog dialogName={DialogsName.PaymentPdfForm} />
+      <BillPaymentPdfPreviewDialog dialogName={DialogsName.PaymentMadePdfForm} />
       <WarehouseFormDialog dialogName={DialogsName.WarehouseForm} />
       <BranchFormDialog dialogName={DialogsName.BranchForm} />
       <BranchActivateDialog dialogName={DialogsName.BranchActivateForm} />

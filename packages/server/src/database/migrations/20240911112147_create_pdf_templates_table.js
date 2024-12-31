@@ -47,6 +47,20 @@ exports.up = function (knex) {
         .unsigned()
         .references('id')
         .inTable('pdf_templates');
+    })
+    .table('bills', (table) => {
+      table
+        .integer('pdf_template_id')
+        .unsigned()
+        .references('id')
+        .inTable('pdf_templates');
+    })
+    .table('bills_payment', (table) => {
+      table
+        .integer('pdf_template_id')
+        .unsigned()
+        .references('id')
+        .inTable('pdf_templates');
     });
 };
 
@@ -69,6 +83,12 @@ exports.down = function (knex) {
       table.dropColumn('pdf_template_id');
     })
     .table('sales_invoices', (table) => {
+      table.dropColumn('pdf_template_id');
+    })
+    .table('bills', (table) => {
+      table.dropColumn('pdf_template_id');
+    })
+    .table('bills_payments', (table) => {
       table.dropColumn('pdf_template_id');
     })
     .dropTableIfExists('pdf_templates');

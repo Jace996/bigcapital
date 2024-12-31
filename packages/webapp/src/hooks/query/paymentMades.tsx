@@ -4,6 +4,7 @@ import { useRequestQuery } from '../useQueryRequest';
 import { transformPagination } from '@/utils';
 import useApiRequest from '../useRequest';
 import t from './types';
+import { useRequestPdf } from '../useRequestPdf';
 
 const commonInvalidateQueries = (client) => {
   // Invalidate payment mades.
@@ -190,4 +191,12 @@ export function usePaymentMade(id, props) {
       ...props,
     },
   );
+}
+
+/**
+ * Retrieve the payment made pdf document data.
+ * @param {number} billPaymentId - Payment made id.
+ */
+export function usePdfBillPayment(billPaymentId) {
+  return useRequestPdf({ url: `purchases/bill_payments/${billPaymentId}` });
 }

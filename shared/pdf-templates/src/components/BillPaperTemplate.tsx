@@ -17,7 +17,7 @@ import {
   DefaultPdfTemplateAddressBilledFrom,
 } from './_constants';
 
-interface InvoiceLine {
+interface BillLine {
   item?: string;
   description?: string;
   quantity?: string;
@@ -26,12 +26,12 @@ interface InvoiceLine {
   discount?: string;
 }
 
-interface InvoiceTaxLine {
+interface BillTaxLine {
   label: string;
   amount: string;
 }
 
-export interface InvoicePaperTemplateProps extends PaperTemplateProps {
+export interface BillPaperTemplateProps extends PaperTemplateProps {
   primaryColor?: string;
   secondaryColor?: string;
 
@@ -39,10 +39,14 @@ export interface InvoicePaperTemplateProps extends PaperTemplateProps {
   showCompanyLogo?: boolean;
   companyLogoUri?: string;
 
-  // Invoice number
-  showInvoiceNumber?: boolean;
-  invoiceNumber?: string;
-  invoiceNumberLabel?: string;
+  // Bill number
+  showBillNumber?: boolean;
+  billNumber?: string;
+  billNumberLabel?: string;
+
+  //Reference
+  referenceNumber?: string;
+  referenceNumberLabel?: string;
 
   // Date of issue
   showDateIssue?: boolean;
@@ -58,14 +62,14 @@ export interface InvoicePaperTemplateProps extends PaperTemplateProps {
   bigtitle?: string;
 
   // Address
-  showCustomerAddress?: boolean;
-  customerAddress?: string;
+  showVendorAddress?: boolean;
+  vendorAddress?: string;
 
   showCompanyAddress?: boolean;
   companyAddress?: string;
 
-  billedToLabel?: string;
   billedFromLabel?: string;
+  billedToLabel?: string;
 
   // Entries
   lineItemLabel?: string;
@@ -110,23 +114,20 @@ export interface InvoicePaperTemplateProps extends PaperTemplateProps {
   dueAmount?: string;
 
   // Footer
-  termsConditionsLabel?: string;
-  showTermsConditions?: boolean;
-  termsConditions?: string;
+  noteLabel?: string;
+  showNote?: boolean;
+  note?: string;
 
   // Statement
   statementLabel?: string;
   showStatement?: boolean;
   statement?: string;
 
-  lines?: Array<InvoiceLine>;
-  taxes?: Array<InvoiceTaxLine>;
-
-  referenceLabel?: string;
-  reference?: string;
+  lines?: Array<BillLine>;
+  taxes?: Array<BillTaxLine>;
 }
 
-export function InvoicePaperTemplate({
+export function BillPaperTemplate({
   // # Colors
   primaryColor,
   secondaryColor,
@@ -147,23 +148,24 @@ export function InvoicePaperTemplate({
   dateIssueLabel = 'Date of issue',
   showDateIssue = true,
 
-  // Invoice #,
-  invoiceNumberLabel = 'Invoice number',
-  invoiceNumber = '346D3D40-0001',
-  showInvoiceNumber = true,
+  // Bill #,
+  billNumberLabel = 'Bill number',
+  billNumber = '346D3D40-0001',
+  showBillNumber = true,
+
+  // Reference
+  referenceNumber = "Payment number",
+  referenceNumberLabel = "Reference",
 
   // Address
-  showCustomerAddress = true,
-  customerAddress = DefaultPdfTemplateAddressBilledTo,
+  showVendorAddress = true,
+  vendorAddress = DefaultPdfTemplateAddressBilledFrom,
 
   showCompanyAddress = true,
-  companyAddress = DefaultPdfTemplateAddressBilledFrom,
-
-  billedToLabel = 'To',
-  billedFromLabel = 'From To',
-
-  referenceLabel = 'Reference',
-  reference = 'Reference',
+  companyAddress = DefaultPdfTemplateAddressBilledTo,
+  
+  billedFromLabel = 'Billed From',
+  billedToLabel = 'Billed To',
 
   // Entries
   lineItemLabel = 'Item',
@@ -200,9 +202,9 @@ export function InvoicePaperTemplate({
   dueAmount = '$562.75',
 
   // Footer paragraphs.
-  termsConditionsLabel = 'Terms & Conditions',
-  showTermsConditions = true,
-  termsConditions = DefaultPdfTemplateTerms,
+  noteLabel = 'Note',
+  showNote = true,
+  note = DefaultPdfTemplateTerms,
 
   lines = [
     {
@@ -223,7 +225,7 @@ export function InvoicePaperTemplate({
   showStatement = true,
   statement = DefaultPdfTemplateStatement,
   ...props
-}: InvoicePaperTemplateProps) {
+}: BillPaperTemplateProps) {
   return (
     <PaperTemplate
       primaryColor={primaryColor}
@@ -233,12 +235,12 @@ export function InvoicePaperTemplate({
       <Stack spacing={24}>
         <Group align="start" spacing={10}>
           <Stack flex={1}>
-            <PaperTemplate.BigTitle title={'Invoice'} />
+            <PaperTemplate.BigTitle title={'Purchase Invoice'} />
 
             <PaperTemplate.TermsList>
-              {showInvoiceNumber && (
-                <PaperTemplate.TermsItem label={invoiceNumberLabel}>
-                  {invoiceNumber}
+              {showBillNumber && (
+                <PaperTemplate.TermsItem label={billNumberLabel}>
+                  {billNumber}
                 </PaperTemplate.TermsItem>
               )}
               {showDateIssue && (
@@ -251,9 +253,11 @@ export function InvoicePaperTemplate({
                   {dueDate}
                 </PaperTemplate.TermsItem>
               )}
-              <PaperTemplate.TermsItem label={referenceLabel}>
-                {reference}
+          
+              <PaperTemplate.TermsItem label={referenceNumberLabel}>
+                {referenceNumber}
               </PaperTemplate.TermsItem>
+             
             </PaperTemplate.TermsList>
           </Stack>
 
@@ -263,16 +267,16 @@ export function InvoicePaperTemplate({
         </Group>
 
         <PaperTemplate.AddressesGroup>
-          {showCompanyAddress && (
+          {showVendorAddress && (
             <PaperTemplate.Address>
               <strong>{billedFromLabel}</strong>
-              <Box dangerouslySetInnerHTML={{ __html: companyAddress }} />
+              <Box dangerouslySetInnerHTML={{ __html: vendorAddress }} />
             </PaperTemplate.Address>
           )}
-          {showCustomerAddress && (
+          {showCompanyAddress && (
             <PaperTemplate.Address>
               <strong>{billedToLabel}</strong>
-              <Box dangerouslySetInnerHTML={{ __html: customerAddress }} />
+              <Box dangerouslySetInnerHTML={{ __html: companyAddress }} />
             </PaperTemplate.Address>
           )}
         </PaperTemplate.AddressesGroup>
@@ -365,17 +369,17 @@ export function InvoicePaperTemplate({
         </Stack>
 
         <Stack spacing={0}>
-          {showTermsConditions && termsConditions && (
-            <PaperTemplate.Statement label={termsConditionsLabel}>
-              {termsConditions}
+          {showNote && note && (
+            <PaperTemplate.Statement label={noteLabel}>
+              {note}
             </PaperTemplate.Statement>
           )}
 
-          {showStatement && statement && (
+          {/* {showStatement && statement && (
             <PaperTemplate.Statement label={statementLabel}>
               {statement}
             </PaperTemplate.Statement>
-          )}
+          )} */}
         </Stack>
       </Stack>
     </PaperTemplate>

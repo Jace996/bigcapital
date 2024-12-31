@@ -16,13 +16,12 @@ import { usePaymentMadeDetailContext } from './PaymentMadeDetailProvider';
  */
 export default function PaymentMadeDetailTableFooter() {
   const { paymentMade } = usePaymentMadeDetailContext();
-
   return (
     <PaymentMadeFooterRoot>
       <PaymentMadeTotalLines labelColWidth={'180px'} amountColWidth={'180px'}>
         <TotalLine
           title={<T id={'payment_made.details.subtotal'} />}
-          value={paymentMade.amount}
+          value={paymentMade.formatted_amount}
           borderStyle={TotalLineBorderStyle.SingleDark}
         />
         <TotalLine

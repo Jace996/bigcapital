@@ -230,6 +230,8 @@ export interface PaymentReceivedPdfTemplateAttributes {
     invoiceNumber: string;
     invoiceAmount: string;
     paidAmount: string;
+    invoiceDate: string;
+    dueAmount: string;
   }>;
 
   showPaymentReceivedNumber: boolean;
@@ -239,6 +241,13 @@ export interface PaymentReceivedPdfTemplateAttributes {
   paymentReceivedDate: string;
   showPaymentReceivedDate: boolean;
   paymentReceivedDateLabel: string;
+  //Extra
+  billedFromLabel?: string,
+
+  referenceLabel ?: string,
+  reference ?: string,
+  accountLabel ?: string,
+  account ?: string,
 }
 
 export interface IPaymentReceivedState {

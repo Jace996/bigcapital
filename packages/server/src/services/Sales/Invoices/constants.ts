@@ -189,7 +189,8 @@ export const defaultInvoicePdfTemplateAttributes = {
   // # Company address
   showCompanyAddress: true,
   companyAddress: '',
-  billedToLabel: 'Billed To',
+  billedToLabel: 'To',
+  billedFromLabel: 'From',
 
   // Entries
   lineItemLabel: 'Item',
@@ -235,4 +236,6 @@ export const defaultInvoicePdfTemplateAttributes = {
   // # Statement
   statementLabel: 'Statement',
   showStatement: true,
+  referenceLabel: "Reference",
+  reference: "Reference",
 };

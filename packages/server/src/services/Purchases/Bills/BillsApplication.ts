@@ -16,6 +16,7 @@ import {
 import { GetDueBills } from './GetDueBills';
 import { OpenBill } from './OpenBill';
 import { GetBillPayments } from './GetBillPayments';
+import { BillPdf } from './BillPdf';
 
 @Service()
 export class BillsApplication {
@@ -42,6 +43,9 @@ export class BillsApplication {
 
   @Inject()
   private getBillPaymentsService: GetBillPayments;
+
+  @Inject()
+  private pdfBillService: BillPdf;
 
   /**
    * Creates a new bill with associated GL entries.
@@ -106,15 +110,25 @@ export class BillsApplication {
     return this.getBillsService.getBills(tenantId, filterDTO);
   }
 
-  /**
+   /**
    * Retrieves the given bill details.
-   * @param {number} tenantId
-   * @param {number} billId
-   * @returns
+   * @param {number} tenantId -
+   * @param {number} billId -
+   * @param {ISystemUser} authorizedUser -
+   * @return {Promise<ISaleInvoice>}
    */
-  public getBill(tenantId: number, billId: number): Promise<IBill> {
-    return this.getBillService.getBill(tenantId, billId);
+   public getBill(
+    tenantId: number,
+    billId: number,
+    authorizedUser: ISystemUser
+  ) {
+    return this.getBillService.getBill(
+      tenantId,
+      billId,
+      authorizedUser
+    );
   }
+
 
   /**
    * Open the given bill.
@@ -144,4 +158,27 @@ export class BillsApplication {
   public getBillPayments = async (tenantId: number, billId: number) => {
     return this.getBillPaymentsService.getBillPayments(tenantId, billId);
   };
+
+  /**
+   * Retrieves the pdf buffer of the given bill.
+   * @param {number} tenantId - Tenant id.
+   * @param {number} bill
+   * @returns {Promise<Buffer>}
+   */
+  public billPdf(tenantId: number, billId: number) {
+    return this.pdfBillService.billPdf(tenantId, billId);
+  }
+
+  /**
+   * Retrieves the html content of the given bill.
+   * @param {number} tenantId
+   * @param {number} billId
+   * @returns {Promise<string>}
+   */
+  public billHtml(
+    tenantId: number,
+    billId: number
+  ): Promise<string> {
+    return this.pdfBillService.billHtml(tenantId, billId);
+  }
 }

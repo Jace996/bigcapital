@@ -9,6 +9,7 @@ import BillPaymentsPages from '@/services/Purchases/BillPayments/BillPaymentsPag
 import DynamicListingService from '@/services/DynamicListing/DynamicListService';
 import CheckPolicies from '@/api/middleware/CheckPolicies';
 import { AbilitySubject, IPaymentMadeAction } from '@/interfaces';
+import { ACCEPT_TYPE } from '@/interfaces/Http';
 
 /**
  * Bills payments controller.
@@ -123,6 +124,9 @@ export default class BillsPayments extends BaseController {
       check('entries.*.index').optional().isNumeric().toInt(),
       check('entries.*.bill_id').exists().isNumeric().toInt(),
       check('entries.*.payment_amount').exists().isNumeric().toFloat(),
+      
+      // # Pdf template
+      check('pdf_template_id').optional({ nullable: true }).isNumeric().toInt(),
 
       check('attachments').isArray().optional(),
       check('attachments.*.key').exists().isString(),
@@ -295,14 +299,43 @@ export default class BillsPayments extends BaseController {
     const { tenantId } = req;
     const { id: billPaymentId } = req.params;
 
-    try {
-      const billPayment = await this.billPaymentsApplication.getBillPayment(
-        tenantId,
-        billPaymentId
-      );
-      return res.status(200).send({ billPayment });
-    } catch (error) {
-      next(error);
+    const accept = this.accepts(req);
+
+    const acceptType = accept.types([
+      ACCEPT_TYPE.APPLICATION_JSON,
+      ACCEPT_TYPE.APPLICATION_PDF,
+      ACCEPT_TYPE.APPLICATION_TEXT_HTML,
+    ]);
+    // Responds pdf format.
+    if (ACCEPT_TYPE.APPLICATION_PDF === acceptType) {
+      const [pdfContent, filename] =
+        await this.billPaymentsApplication.getBillPaymentPdf(
+          tenantId,
+          billPaymentId
+        );
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Length': pdfContent.length,
+        'Content-Disposition': `attachment; filename="${filename}"`,
+      });
+      res.send(pdfContent);
+      // Responds html format.
+    } else if (ACCEPT_TYPE.APPLICATION_TEXT_HTML === acceptType) {
+      const htmlContent =
+        await this.billPaymentsApplication.getBillPaymentHtml(
+          tenantId,
+          billPaymentId
+        );
+      return res.status(200).send({ htmlContent });
+      // Responds json format.
+    } else {
+      const billPayment =
+        await this.billPaymentsApplication.getBillPayment(
+          tenantId,
+          billPaymentId
+        );
+        return res.status(200).send({ billPayment });
+
     }
   }
 

@@ -121,3 +121,80 @@ export const BillsSampleData = [
     'Line Description': 'Quam eligendi provident.',
   },
 ];
+
+export const defaultBillPdfTemplateAttributes = {
+  primaryColor: 'red',
+  secondaryColor: 'red',
+
+  companyName: 'Bigcapital Technology, Inc.',
+
+  showCompanyLogo: true,
+  companyLogoKey: '',
+  companyLogoUri: '',
+
+  dueDateLabel: 'Date due',
+  showDueDate: true,
+
+  dateIssueLabel: 'Date of issue',
+  showDateIssue: true,
+
+  // # Bill number,
+  billNumberLabel: 'Bill number',
+  showBillNumber: true,
+  referenceNumberLabel: 'Reference',
+
+
+  // # Vendor address
+  showVendorAddress: true,
+  vendorAddress: '',
+
+  // # Company address
+  showCompanyAddress: true,
+  companyAddress: '',
+  billedToLabel: 'Billed To',
+
+  // Entries
+  lineItemLabel: 'Item',
+  lineQuantityLabel: 'Qty',
+  lineRateLabel: 'Rate',
+  lineTotalLabel: 'Total',
+
+  totalLabel: 'Total',
+  subtotalLabel: 'Subtotal',
+  discountLabel: 'Discount',
+  paymentMadeLabel: 'Payment Amount',
+  balanceDueLabel: 'Due Amount',
+
+  // Totals
+  showTotal: true,
+  showSubtotal: true,
+  showDiscount: true,
+  showTaxes: true,
+  showPaymentMade: true,
+  showDueAmount: true,
+  showBalanceDue: true,
+
+  discount: '0.00',
+
+  // Footer paragraphs.
+  noteLabel: 'Note',
+  showNote: true,
+
+  lines: [
+    {
+      item: 'Simply dummy text',
+      description: 'Simply dummy text of the printing and typesetting',
+      rate: '1',
+      quantity: '1000',
+      total: '$1000.00',
+    },
+  ],
+  taxes: [
+    { label: 'Sample Tax1 (4.70%)', amount: '11.75' },
+    { label: 'Sample Tax2 (7.00%)', amount: '21.74' },
+  ],
+
+  // # Statement
+  statementLabel: 'Statement',
+  showStatement: true,
+};

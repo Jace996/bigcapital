@@ -57,6 +57,7 @@ export default class BillPayment extends mixin(TenantModel, [
     const Account = require('models/Account');
     const Branch = require('models/Branch');
     const Document = require('models/Document');
+    const { PdfTemplate } = require('models/PdfTemplate');
 
     return {
       entries: {
@@ -132,6 +133,17 @@ export default class BillPayment extends mixin(TenantModel, [
         },
         filter(query) {
           query.where('model_ref', 'BillPayment');
+        },
+      },
+      /**
+       * Bill may belongs to pdf branding template.
+       */
+      pdfTemplate: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: PdfTemplate,
+        join: {
+          from: 'bills_payments.pdfTemplateId',
+          to: 'pdf_templates.id',
         },
       },
     };

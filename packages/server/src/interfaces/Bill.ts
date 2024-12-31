@@ -101,6 +101,7 @@ export interface IBill {
   taxAmountWithheldLocal: number;
   total: number;
   totalLocal: number;
+  pdfTemplateId?: number;
 }
 
 export interface IBillsFilter extends IDynamicListFilterDTO {

@@ -11,7 +11,7 @@ import {
   DefaultPdfTemplateAddressBilledTo,
 } from './_constants';
 
-export interface PaymentReceivedPaperTemplateProps extends PaperTemplateProps {
+export interface BillPaymentPaperTemplateProps extends PaperTemplateProps {
   // # Company logo
   showCompanyLogo?: boolean;
   companyLogoUri?: string;
@@ -19,14 +19,15 @@ export interface PaymentReceivedPaperTemplateProps extends PaperTemplateProps {
   // # Company name
   companyName?: string;
 
-  // Customer address
-  showCustomerAddress?: boolean;
-  customerAddress?: string;
+  // Vendor address
+  showVendorAddress?: boolean;
+  vendorAddress?: string;
 
   // Company address
   showCompanyAddress?: boolean;
   companyAddress?: string;
 
+  billedFromLabel?: string;
   billedToLabel?: string;
 
   // Total.
@@ -41,32 +42,28 @@ export interface PaymentReceivedPaperTemplateProps extends PaperTemplateProps {
 
   lines?: Array<{
     paidAmount: string;
-    invoiceAmount: string;
-    invoiceNumber: string;
-    invoiceDate: string;
-    dueAmount: string;
+    billAmount: string;
+    billDueAmount: string;
+    billDate: string;
+    billNumber: string;
   }>;
 
   // Issue date.
-  paymentReceivedDateLabel?: string;
-  showPaymentReceivedDate?: boolean;
-  paymentReceivedDate?: string;
+  billPaymentDateLabel?: string;
+  showBillPaymentDate?: boolean;
+  billPaymentDate?: string;
 
   // Payment received number.
-  paymentReceivedNumebr?: string;
-  paymentReceivedNumberLabel?: string;
-  showPaymentReceivedNumber?: boolean;
-
-  //Extra
-  billedFromLabel?: string,
-
-  referenceLabel ?: string,
-  reference ?: string,
-  accountLabel ?: string,
-  account ?: string,
+  billPaymentNumber?: string;
+  billPaymentNumberLabel?: string;
+  referenceLabel?: string;
+  reference?: string;
+  accountLabel?: string;
+  account?: string;
+  showBillPaymentNumber?: boolean;
 }
 
-export function PaymentReceivedPaperTemplate({
+export function BillPaymentPaperTemplate({
   // # Colors
   primaryColor,
   secondaryColor,
@@ -78,21 +75,16 @@ export function PaymentReceivedPaperTemplate({
   // # Company name
   companyName = 'Bigcapital Technology, Inc.',
 
-  // # Customer address
-  showCustomerAddress = true,
-  customerAddress = DefaultPdfTemplateAddressBilledTo,
+  // # Vendor address
+  showVendorAddress = true,
+  vendorAddress = DefaultPdfTemplateAddressBilledTo,
 
   // # Company address
   showCompanyAddress = true,
   companyAddress = DefaultPdfTemplateAddressBilledFrom,
 
-  billedToLabel = 'To',
-  billedFromLabel = 'Received From',
-
-  referenceLabel = 'Reference',
-  reference = 'Reference',
-  accountLabel = 'Payment Account',
-  account = 'Account',
+  billedFromLabel = 'Pay From',
+  billedToLabel = 'Pay To',
 
   total = '$1000.00',
   totalLabel = 'Total',
@@ -104,48 +96,52 @@ export function PaymentReceivedPaperTemplate({
 
   lines = [
     {
-      invoiceNumber: 'INV-00001',
-      invoiceAmount: '$1000.00',
+      billDate: 'September 3, 2024',
+      billNumber: 'INV-00001',
+      billAmount: '$1000.00',
+      billDueAmount: '$1000.00',
       paidAmount: '$1000.00',
-      invoiceDate: 'September 3, 2024',
-      dueAmount: '$1000.00',
     },
   ],
-  showPaymentReceivedNumber = true,
-  paymentReceivedNumberLabel = 'Payment Number',
-  paymentReceivedNumebr = '346D3D40-0001',
+  showBillPaymentNumber = true,
+  billPaymentNumberLabel = 'Payment Number',
+  billPaymentNumber = '346D3D40-0001',
+  referenceLabel = 'Reference',
+  reference = 'Reference',
+  accountLabel = 'Payment Account',
+  account = 'Account',
 
-  paymentReceivedDate = 'September 3, 2024',
-  showPaymentReceivedDate = true,
-  paymentReceivedDateLabel = 'Payment Date',
-}: PaymentReceivedPaperTemplateProps) {
+  billPaymentDate = 'September 3, 2024',
+  showBillPaymentDate = true,
+  billPaymentDateLabel = 'Payment Date',
+}: BillPaymentPaperTemplateProps) {
   return (
     <PaperTemplate primaryColor={primaryColor} secondaryColor={secondaryColor}>
       <Stack spacing={24}>
         <Group align={'start'} spacing={10}>
           <Stack flex={1}>
-            <PaperTemplate.BigTitle title={'Payment'} />
+            <PaperTemplate.BigTitle title={'Payment Made'} />
 
             <PaperTemplate.TermsList>
-              {showPaymentReceivedNumber && (
-                <PaperTemplate.TermsItem label={paymentReceivedNumberLabel}>
-                  {paymentReceivedNumebr}
+              {showBillPaymentNumber && (
+                <PaperTemplate.TermsItem label={billPaymentNumberLabel}>
+                  {billPaymentNumber}
                 </PaperTemplate.TermsItem>
               )}
 
-              {showPaymentReceivedDate && (
-                <PaperTemplate.TermsItem label={paymentReceivedDateLabel}>
-                  {paymentReceivedDate}
+              {showBillPaymentDate && (
+                <PaperTemplate.TermsItem label={billPaymentDateLabel}>
+                  {billPaymentDate}
                 </PaperTemplate.TermsItem>
               )}
-
+  
               <PaperTemplate.TermsItem label={accountLabel}>
                 {account}
               </PaperTemplate.TermsItem>
               <PaperTemplate.TermsItem label={referenceLabel}>
                 {reference}
               </PaperTemplate.TermsItem>
-
+             
             </PaperTemplate.TermsList>
           </Stack>
 
@@ -155,17 +151,17 @@ export function PaymentReceivedPaperTemplate({
         </Group>
 
         <PaperTemplate.AddressesGroup>
-          {showCustomerAddress && (
+          {showCompanyAddress && (
             <PaperTemplate.Address>
               <strong>{billedFromLabel}</strong>
-              <Box dangerouslySetInnerHTML={{ __html: customerAddress }} />
+              <Box dangerouslySetInnerHTML={{ __html: companyAddress }} />
             </PaperTemplate.Address>
           )}
 
-          {showCompanyAddress && (
+          {showVendorAddress && (
             <PaperTemplate.Address>
               <strong>{billedToLabel}</strong>
-              <Box dangerouslySetInnerHTML={{ __html: companyAddress }} />
+              <Box dangerouslySetInnerHTML={{ __html: vendorAddress }} />
             </PaperTemplate.Address>
           )}
         </PaperTemplate.AddressesGroup>
@@ -173,16 +169,16 @@ export function PaymentReceivedPaperTemplate({
         <Stack spacing={0}>
           <PaperTemplate.Table
             columns={[
-              { label: 'Invoice Date', accessor: 'invoiceDate' },
-              { label: 'Invoice #', accessor: 'invoiceNumber' },
+              { label: 'Bill Date', accessor: 'billDate' },
+              { label: 'Bill #', accessor: 'billNumber' },
               {
-                label: 'Invoice Amount',
-                accessor: 'invoiceAmount',
+                label: 'Bill Amount',
+                accessor: 'billAmount',
                 align: 'right',
               },
               {
                 label: 'Amount Due',
-                accessor: 'dueAmount',
+                accessor: 'billDueAmount',
                 align: 'right',
               },
               { label: 'Paid Amount', accessor: 'paidAmount', align: 'right' },

@@ -76,6 +76,11 @@ function BillDetailActionsBar({
     openDialog('allocate-landed-cost', { billId });
   };
 
+  // Handle print bills.
+  const handlePrintBill = () => {
+    openDialog('bill-pdf-preview', { billId });
+  };
+
   return (
     <DrawerActionsBar>
       <NavbarGroup>
@@ -98,6 +103,15 @@ function BillDetailActionsBar({
             />
           </If>
         </Can>
+         <Can I={BillAction.View} a={AbilitySubject.Bill}>
+            <Button
+              className={Classes.MINIMAL}
+              icon={<Icon icon="print-16" />}
+              text={<T id={'print'} />}
+              onClick={handlePrintBill}
+            />
+            <NavbarDivider />
+         </Can>
         <Can I={BillAction.Delete} a={AbilitySubject.Bill}>
           <NavbarDivider />
           <Button

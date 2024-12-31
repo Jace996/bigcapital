@@ -34,6 +34,18 @@ exports.up = function (knex) {
       predefined: true,
       default: true,
     },
+    {
+      resource: 'Bill',
+      templateName: 'Standard Template',
+      predefined: true,
+      default: true,
+    },
+    {
+      resource: 'BillPayment',
+      templateName: 'Standard Template',
+      predefined: true,
+      default: true,
+    },
   ]);
 };
 

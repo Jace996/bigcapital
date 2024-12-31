@@ -48,3 +48,54 @@ export const BillsPaymentsSampleData = [
     'Payment Amount': 100,
   },
 ];
+
+export const defaultBillPaymentPdfTemplateAttributes = {
+  // # Colors
+  primaryColor: '#000',
+  secondaryColor: '#000',
+
+  // # Company logo
+  showCompanyLogo: true,
+  companyLogoUri: '',
+
+  // # Company name
+  companyName: 'Bigcapital Technology, Inc.',
+
+  // # Vendor address
+  showVendorAddress: true,
+  vendorAddress: '',
+
+  // # Company address
+  showCompanyAddress: true,
+  companyAddress: '',
+  billedFromLabel: 'Pay From',
+  billedToLabel: 'Pay To',
+
+  // Total
+  total: '$1000.00',
+  totalLabel: 'Total',
+  showTotal: true,
+
+  // Subtotal
+  subtotal: '1000/00',
+  subtotalLabel: 'Subtotal',
+  showSubtotal: true,
+
+  lines: [
+    {
+      billNumber: 'INV-00001',
+      billAmount: '$1000.00',
+      billDueAmount: '$1000.00',
+      paidAmount: '$1000.00',
+    },
+  ],
+  // Payment received number
+  showPaymentReceivedNumber: true,
+  billPaymentNumberLabel: 'Payment Number',
+  billPaymentNumber: '346D3D40-0001',
+
+  // Payment date.
+  billPaymentDate: 'September 3, 2024',
+  showPaymentReceivedDate: true,
+  billPaymentDateLabel: 'Payment Date',
+};

@@ -29,6 +29,7 @@ export interface IBillPayment {
 
   localAmount?: number;
   branchId?: number;
+  pdfTemplateId?: number;
 }
 
 export interface IBillPaymentEntryDTO {
@@ -118,4 +119,49 @@ export enum IPaymentMadeAction {
   Edit = 'Edit',
   Delete = 'Delete',
   View = 'View',
+}
+
+export interface BillPaymentPdfTemplateAttributes {
+  primaryColor: string;
+  secondaryColor: string;
+  showCompanyLogo: boolean;
+  companyLogo: string;
+  companyName: string;
+
+  // Vendor Address
+  showVendorAddress: boolean;
+  vendorAddress: string;
+
+  // Company address
+  showCompanyAddress: boolean;
+  companyAddress: string;
+  billedToLabel: string;
+
+  total: string;
+  totalLabel: string;
+  showTotal: boolean;
+
+  subtotal: string;
+  subtotalLabel: string;
+  showSubtotal: boolean;
+
+  lines: Array<{
+    billNumber: string;
+    billAmount: string;
+    paidAmount: string;
+  }>;
+
+  showBillPaymentNumber: boolean;
+  billPaymentNumberLabel: string;
+  billPaymentNumber: string;
+  reference: string;
+  account: string;
+
+  billPaymentDate: string;
+  showBillPaymentDate: boolean;
+  billPaymentDateLabel: string;
+}
+
+export interface IBillPaymentState {
+  defaultTemplateId: number;
 }

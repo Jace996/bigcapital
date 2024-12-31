@@ -6,6 +6,7 @@ import { EditBillPayment } from './EditBillPayment';
 import { GetBillPayments } from './GetBillPayments';
 import { GetBillPayment } from './GetBillPayment';
 import { GetPaymentBills } from './GetPaymentBills';
+import GetBillPaymentPdf from './GetBillPaymentPdf';
 
 /**
  * Bill payments application.
@@ -30,6 +31,9 @@ export class BillPaymentsApplication {
 
   @Inject()
   private getPaymentBillsService: GetPaymentBills;
+
+  @Inject()
+  private getBillPaymentPdfService: GetBillPaymentPdf;
 
   /**
    * Creates a bill payment with associated GL entries.
@@ -106,4 +110,37 @@ export class BillPaymentsApplication {
   public getPaymentBills(tenantId: number, billPaymentId: number) {
     return this.getPaymentBillsService.getPaymentBills(tenantId, billPaymentId);
   }
+
+  /**
+   * Retrieve pdf content of the given payment made.
+   * @param {number} tenantId
+   * @param {PaymentReceive} billPayment
+   * @returns
+   */
+  public getBillPaymentPdf = (
+    tenantId: number,
+    billPaymentId: number
+  ) => {
+    return this.getBillPaymentPdfService.getBillPaymentPdf(
+      tenantId,
+      billPaymentId
+    );
+  };
+
+  /**
+   * Retrieves the given payment made html document.
+   * @param {number} tenantId
+   * @param {number} billPaymentId
+   * @returns {Promise<string>}
+   */
+  public getBillPaymentHtml = (
+    tenantId: number,
+    billPaymentId: number
+  ) => {
+    return this.getBillPaymentPdfService.getBillPaymentHtml(
+      tenantId,
+      billPaymentId
+    );
+  };
+
 }

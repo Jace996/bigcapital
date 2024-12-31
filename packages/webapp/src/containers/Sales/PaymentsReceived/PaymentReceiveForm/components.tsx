@@ -16,8 +16,8 @@ import withSettings from '@/containers/Settings/withSettings';
 /**
  * Invoice date cell.
  */
-function InvoiceDateCell({ value }) {
-  return <span>{moment(value).format('YYYY MMM DD')}</span>;
+function InvoiceDateCell({ row: { original }, value }) {
+  return <span>{moment(original.invoice_date).format('DD/MM/YYYY')}</span>;
 }
 
 /**

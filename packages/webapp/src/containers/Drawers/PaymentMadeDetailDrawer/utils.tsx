@@ -22,31 +22,31 @@ export const usePaymentMadeEntriesColumns = () => {
       },
       {
         Header: intl.get('bill_number'),
-        accessor: 'bill_no',
+        accessor: 'bill.bill_number',
         width: 150,
         disableSortBy: true,
         className: 'bill_number',
       },
       {
         Header: intl.get('bill_amount'),
-        accessor: 'bill.amount',
-        Cell: FormatNumberCell,
-        width: getColumnWidth(entries, 'bill.amount', {
+        accessor: 'bill.total_formatted',
+        width: getColumnWidth(entries, 'bill.total_formatted', {
           minWidth: 60,
           magicSpacing: 5,
         }),
         align: 'right',
+        textOverview: true,
       },
       {
-        Header: intl.get('due_amount'),
-        accessor: 'bill.due_amount',
-        Cell: FormatNumberCell,
-        width: getColumnWidth(entries, 'bill.due_amount', {
+        Header: intl.get('amount_due'),
+        accessor: 'bill.formatted_due_amount',
+        align: 'right',
+        width: getColumnWidth(entries, 'bill.formatted_due_amount', {
           minWidth: 60,
           magicSpacing: 5,
         }),
         disableSortBy: true,
-        align: 'right',
+        textOverview: true,
       },
       {
         Header: intl.get('payment_amount'),

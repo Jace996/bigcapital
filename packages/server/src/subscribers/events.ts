@@ -275,6 +275,8 @@ export default {
    * Bills service.
    */
   bill: {
+    onPdfViewed: 'onBillPdfViewed',
+
     onCreating: 'onBillCreating',
     onCreated: 'onBillCreated',
 
@@ -295,6 +297,8 @@ export default {
    * Bill payments service.
    */
   billPayment: {
+    onPdfViewed: 'onBillPaymentPdfViewed',
+
     onCreating: 'onBillPaymentCreating',
     onCreated: 'onBillPaymentCreated',
 

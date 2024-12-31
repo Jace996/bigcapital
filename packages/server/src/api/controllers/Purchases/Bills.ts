@@ -14,6 +14,7 @@ import DynamicListingService from '@/services/DynamicListing/DynamicListService'
 import { ServiceError } from '@/exceptions';
 import CheckPolicies from '@/api/middleware/CheckPolicies';
 import { BillsApplication } from '@/services/Purchases/Bills/BillsApplication';
+import { ACCEPT_TYPE } from '@/interfaces/Http';
 
 @Service()
 export default class BillsController extends BaseController {
@@ -153,6 +154,9 @@ export default class BillsController extends BaseController {
       // Attachments
       check('attachments').isArray().optional(),
       check('attachments.*.key').exists().isString(),
+
+      // # Pdf template
+      check('pdf_template_id').optional({ nullable: true }).isNumeric().toInt(),
 
       // # Discount
       check('discount_type')
@@ -320,16 +324,44 @@ export default class BillsController extends BaseController {
    * @return {Response}
    */
   private async getBill(req: Request, res: Response, next: NextFunction) {
-    const { tenantId } = req;
+    const { tenantId, user } = req;
     const { id: billId } = req.params;
 
-    try {
-      const bill = await this.billsApplication.getBill(tenantId, billId);
-
-      return res.status(200).send({ bill });
-    } catch (error) {
-      next(error);
-    }
+     const accept = this.accepts(req);
+    
+        const acceptType = accept.types([
+          ACCEPT_TYPE.APPLICATION_JSON,
+          ACCEPT_TYPE.APPLICATION_PDF,
+          ACCEPT_TYPE.APPLICATION_TEXT_HTML,
+        ]);
+        // Retrieves invoice in PDF format.
+        if (ACCEPT_TYPE.APPLICATION_PDF === acceptType) {
+          const [pdfContent, filename] =
+            await this.billsApplication.billPdf(
+              tenantId,
+              billId
+            );
+          res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Length': pdfContent.length,
+            'Content-Disposition': `attachment; filename="${filename}"`,
+          });
+          res.send(pdfContent);
+          // Retrieves invoice in html json format.
+        } else if (ACCEPT_TYPE.APPLICATION_TEXT_HTML === acceptType) {
+          const htmlContent = await this.billsApplication.billHtml(
+            tenantId,
+            billId
+          );
+          return res.status(200).send({ htmlContent });
+        } else {
+          const bill = await this.billsApplication.getBill(
+            tenantId,
+            billId,
+            user
+          );
+          return res.status(200).send({ bill });
+        }
   }
 
   /**

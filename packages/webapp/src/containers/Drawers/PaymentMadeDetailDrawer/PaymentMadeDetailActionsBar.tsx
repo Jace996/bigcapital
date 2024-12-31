@@ -35,6 +35,9 @@ function PaymentMadeDetailActionsBar({
 
   // #withDrawerActions
   closeDrawer,
+  
+  // #withDialogActions
+  openDialog,
 }) {
   const history = useHistory();
 
@@ -51,6 +54,11 @@ function PaymentMadeDetailActionsBar({
     openAlert('payment-made-delete', { paymentMadeId });
   };
 
+  // Handle print payment made.
+  const handlePrintPaymentMade = () => {
+    openDialog('payment-made-pdf-preview', { paymentMadeId });
+  };
+
   return (
     <DashboardActionsBar>
       <NavbarGroup>
@@ -60,6 +68,14 @@ function PaymentMadeDetailActionsBar({
             icon={<Icon icon="pen-18" />}
             text={<T id={'edit_payment_made'} />}
             onClick={handleEditPaymentMade}
+          />
+        </Can>
+        <Can I={PaymentMadeAction.view} a={AbilitySubject.PaymentMade}>
+          <Button
+            className={Classes.MINIMAL}
+            icon={<Icon icon="pen-18" />}
+            text={<T id={'print_payment_made'} />}
+            onClick={handlePrintPaymentMade}
           />
         </Can>
         <Can I={PaymentMadeAction.Delete} a={AbilitySubject.PaymentMade}>

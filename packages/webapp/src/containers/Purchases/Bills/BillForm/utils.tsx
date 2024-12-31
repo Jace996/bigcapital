@@ -66,6 +66,7 @@ export const defaultBill = {
   currency_code: '',
   entries: [...repeatValue(defaultBillEntry, MIN_LINES_NUMBER)],
   attachments: [],
+  pdf_template_id: '',
 
   // Adjustment
   adjustment: '',

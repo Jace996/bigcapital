@@ -12,8 +12,8 @@ function BillNumberAccessor(row) {
   return row?.bill_no ? row?.bill_no : '-';
 }
 
-function BillDateCell({ value }) {
-  return moment(value).format('YYYY MMM DD');
+function BillDateCell({  row: { original }, value}) {
+  return moment(original.date).format('DD/MM/YYYY');
 }
 
 /**

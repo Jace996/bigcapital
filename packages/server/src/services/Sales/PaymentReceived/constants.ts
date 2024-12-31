@@ -63,7 +63,7 @@ export const defaultPaymentReceivedPdfTemplateAttributes = {
   // # Company address
   showCompanyAddress: true,
   companyAddress: '',
-  billedToLabel: 'Billed To',
+  billedToLabel: 'To',
 
   // Total
   total: '$1000.00',
@@ -80,6 +80,8 @@ export const defaultPaymentReceivedPdfTemplateAttributes = {
       invoiceNumber: 'INV-00001',
       invoiceAmount: '$1000.00',
       paidAmount: '$1000.00',
+      invoiceDate: 'September 3, 2024',
+      dueAmount: '$1000.00',
     },
   ],
   // Payment received number
@@ -91,4 +93,12 @@ export const defaultPaymentReceivedPdfTemplateAttributes = {
   paymentReceivedDate: 'September 3, 2024',
   showPaymentReceivedDate: true,
   paymentReceivedDateLabel: 'Payment Date',
+
+  // Extra
+  billedFromLabel: 'Received From',
+
+  referenceLabel: 'Reference',
+  reference: 'Reference',
+  accountLabel: 'Payment Account',
+  account: 'Account',
 };
