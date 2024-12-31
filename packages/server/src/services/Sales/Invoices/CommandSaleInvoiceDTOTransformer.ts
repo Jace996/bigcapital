@@ -20,6 +20,7 @@ import { ItemEntriesTaxTransactions } from '@/services/TaxRates/ItemEntriesTaxTr
 import { assocItemEntriesDefaultIndex } from '@/services/Items/utils';
 import { ItemEntry } from '@/models';
 import { BrandingTemplateDTOTransformer } from '@/services/PdfTemplate/BrandingTemplateDTOTransformer';
+import HasTenancyService from '@/services/Tenancy/TenancyService';
 
 @Service()
 export class CommandSaleInvoiceDTOTransformer {
@@ -44,6 +45,8 @@ export class CommandSaleInvoiceDTOTransformer {
   @Inject()
   private brandingTemplatesTransformer: BrandingTemplateDTOTransformer;
 
+  @Inject()
+  private tenancy: HasTenancyService;
   /**
    * Transformes the create DTO to invoice object model.
    * @param {ISaleInvoiceCreateDTO} saleInvoiceDTO - Sale invoice DTO.
@@ -58,7 +61,11 @@ export class CommandSaleInvoiceDTOTransformer {
     oldSaleInvoice?: ISaleInvoice
   ): Promise<ISaleInvoice> {
     const entriesModels = this.transformDTOEntriesToModels(saleInvoiceDTO);
-    const amount = this.getDueBalanceItemEntries(entriesModels);
+    // const amount = this.getDueBalanceItemEntries(entriesModels);
+
+    const { ItemEntry } = this.tenancy.models(tenantId);
+
+    const amount = sumBy(saleInvoiceDTO.entries, (e) => ItemEntry.calcAmount(e));
 
     // Retreive the next invoice number.
     const autoNextNumber = this.invoiceIncrement.getNextInvoiceNumber(tenantId);
