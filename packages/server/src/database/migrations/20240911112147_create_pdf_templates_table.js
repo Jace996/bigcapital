@@ -55,7 +55,7 @@ exports.up = function (knex) {
         .references('id')
         .inTable('pdf_templates');
     })
-    .table('bills_payment', (table) => {
+    .table('bills_payments', (table) => {
       table
         .integer('pdf_template_id')
         .unsigned()
