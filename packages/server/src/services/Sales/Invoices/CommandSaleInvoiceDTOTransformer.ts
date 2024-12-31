@@ -110,7 +110,7 @@ export class CommandSaleInvoiceDTOTransformer {
         ['invoiceDate', 'dueDate']
       ),
       // Avoid rewrite the deliver date in edit mode when already published.
-      balance: amount,
+      balance: amount.toFixed(2),
       currencyCode: customer.currencyCode,
       exchangeRate: saleInvoiceDTO.exchangeRate || 1,
       ...(saleInvoiceDTO.delivered &&

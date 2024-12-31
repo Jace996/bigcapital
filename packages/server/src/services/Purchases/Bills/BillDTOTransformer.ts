@@ -103,7 +103,7 @@ export class BillDTOTransformer {
         'billDate',
         'dueDate',
       ]),
-      amount,
+      amount: amount.toFixed(2),
       landedCostAmount,
       currencyCode: vendor.currencyCode,
       exchangeRate: billDTO.exchangeRate || 1,
