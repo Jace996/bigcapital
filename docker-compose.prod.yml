@@ -155,7 +155,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     expose:
-      - '3306'
+      - "3306:3306"
     networks:
       - bigcapital_network
 
