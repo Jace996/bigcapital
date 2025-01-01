@@ -120,7 +120,7 @@ export function BillPaymentPaperTemplate({
       <Stack spacing={24}>
         <Group align={'start'} spacing={10}>
           <Stack flex={1}>
-            <PaperTemplate.BigTitle title={'Payment Made'} />
+            <PaperTemplate.BigTitle title={'Payment Voucher'} />
 
             <PaperTemplate.TermsList>
               {showBillPaymentNumber && (
