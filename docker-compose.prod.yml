@@ -19,15 +19,15 @@ services:
       - bigcapital_network
 
   webapp:
-    container_name: bigcapital-webapp
-    image: bigcapitalhq/webapp:latest
+    container_name: jace996-webapp
+    image: jace996/webapp:latest
     restart: on-failure
     networks:
       - bigcapital_network
 
   server:
-    container_name: bigcapital-server
-    image: bigcapitalhq/server:latest
+    container_name: jace996-server
+    image: jace996/server:latest
     expose:
       - '3000'
     links:
@@ -124,7 +124,7 @@ services:
       - S3_BUCKET=${S3_BUCKET}
 
   database_migration:
-    container_name: bigcapital-database-migration
+    container_name: jace996-database-migration
     build:
       context: ./
       dockerfile: docker/migration/Dockerfile
@@ -143,7 +143,7 @@ services:
       - bigcapital_network
 
   mysql:
-    container_name: bigcapital-mysql
+    container_name: jace996-mysql
     restart: on-failure
     build:
       context: ./docker/mariadb
@@ -160,7 +160,7 @@ services:
       - bigcapital_network
 
   mongo:
-    container_name: bigcapital-mongo
+    container_name: jace996-mongo
     restart: on-failure
     build: ./docker/mongo
     expose:
@@ -171,7 +171,7 @@ services:
       - bigcapital_network
 
   redis:
-    container_name: bigcapital-redis
+    container_name: jace996-redis
     restart: on-failure
     build:
       context: ./docker/redis
