@@ -1,9 +1,13 @@
 # This workflow will build a docker container, publish it to Github Registry.
 name: Build and Deploy Docker Container
+# on:
+#   release:
+#     types: [created]
+#   workflow_dispatch:
 on:
-  release:
-    types: [created]
-  workflow_dispatch:
+  push:
+    branches:
+      - master
 
 env:
   WEBAPP_IMAGE_NAME: jace996/webapp
