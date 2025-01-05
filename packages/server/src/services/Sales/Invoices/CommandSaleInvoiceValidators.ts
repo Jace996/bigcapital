@@ -54,7 +54,7 @@ export class CommandSaleInvoiceValidators {
     saleInvoiceAmount: number,
     paymentAmount: number
   ) {
-    if (saleInvoiceAmount < paymentAmount) {
+    if (saleInvoiceAmount < paymentAmount && paymentAmount > 1) {
       throw new ServiceError(ERRORS.INVOICE_AMOUNT_SMALLER_THAN_PAYMENT_AMOUNT);
     }
   }

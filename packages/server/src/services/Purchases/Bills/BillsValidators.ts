@@ -30,7 +30,7 @@ export class BillsValidators {
     billAmount: number,
     paidAmount: number
   ) {
-    if (billAmount < paidAmount) {
+    if (billAmount < paidAmount && paidAmount > 1) {
       throw new ServiceError(ERRORS.BILL_AMOUNT_SMALLER_THAN_PAID_AMOUNT);
     }
   }

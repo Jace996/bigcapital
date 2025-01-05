@@ -1,4 +1,4 @@
-FROM bigcapitalhq/server:latest as build
+FROM jace996/server:latest as build
 
 ARG DB_HOST= \
   DB_USER= \

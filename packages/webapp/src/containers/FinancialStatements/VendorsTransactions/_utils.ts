@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useMemo } from 'react';
 import { transformToForm } from '@/utils';
 import { useAppQueryString } from '@/hooks';
+import { castArray } from 'lodash';
 
 /**
  * The validation schema of vendors transactions.
@@ -26,6 +27,7 @@ export const getVendorsTransactionsDefaultQuery = () => ({
   fromDate: moment().startOf('month').format('YYYY-MM-DD'),
   toDate: moment().format('YYYY-MM-DD'),
   vendorsIds: [],
+  filterByOption: 'with-transactions',
 });
 
 /**
@@ -39,7 +41,9 @@ const parseVendorsTransactionsQuery = (query) => {
   };
   return {
     ...transformed,
-    vendorsIds: transformed.vendorsIds ? transformed.vendorsIds : [],
+    // vendorsIds: transformed.vendorsIds ? transformed.vendorsIds : [],
+    vendorsIds: castArray(transformed.vendorsIds),
+    
   };
 };
 

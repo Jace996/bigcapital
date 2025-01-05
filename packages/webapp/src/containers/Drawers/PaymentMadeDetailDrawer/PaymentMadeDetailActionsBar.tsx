@@ -73,7 +73,7 @@ function PaymentMadeDetailActionsBar({
         <Can I={PaymentMadeAction.view} a={AbilitySubject.PaymentMade}>
           <Button
             className={Classes.MINIMAL}
-            icon={<Icon icon="pen-18" />}
+            icon={<Icon icon="print-16" />}
             text={<T id={'print_payment_made'} />}
             onClick={handlePrintPaymentMade}
           />

@@ -285,7 +285,9 @@ export function InvoicePaperTemplate({
                 accessor: (data) => (
                   <Stack spacing={2}>
                     <Text>{data.item}</Text>
-                    <Text color={'#5f6b7c'} fontSize={12}>
+                    <Text 
+                    // color={'#5f6b7c'} 
+                    fontSize={12} fontFamily={"Roboto"}>
                       {data.description}
                     </Text>
                   </Stack>

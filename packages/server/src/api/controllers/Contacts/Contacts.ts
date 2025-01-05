@@ -99,7 +99,7 @@ export default class ContactsController extends BaseController {
       filterRoles: [],
       sortOrder: 'asc',
       columnSortBy: 'display_name',
-      limit: 10,
+      limit: 1000,
       ...this.matchedQueryData(req),
     };
     try {
