@@ -26,12 +26,12 @@ function CustomersList({
   resetCustomersTableState,
 }) {
   // Resets the accounts table state once the page unmount.
-  useEffect(
-    () => () => {
-      resetCustomersTableState();
-    },
-    [resetCustomersTableState],
-  );
+  // useEffect(
+  //   () => () => {
+  //     resetCustomersTableState();
+  //   },
+  //   [resetCustomersTableState],
+  // );
 
   return (
     <CustomersListProvider

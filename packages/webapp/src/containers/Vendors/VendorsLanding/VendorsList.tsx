@@ -26,12 +26,12 @@ function VendorsList({
   resetVendorsTableState,
 }) {
   // Resets the vendors table state once the page unmount.
-  useEffect(
-    () => () => {
-      resetVendorsTableState();
-    },
-    [resetVendorsTableState],
-  );
+  // useEffect(
+  //   () => () => {
+  //     resetVendorsTableState();
+  //   },
+  //   [resetVendorsTableState],
+  // );
 
   return (
     <VendorsListProvider

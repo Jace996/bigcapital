@@ -26,12 +26,12 @@ function BillsList({
   resetBillsTableState,
 }) {
   // Resets the accounts table state once the page unmount.
-  useEffect(
-    () => () => {
-      resetBillsTableState();
-    },
-    [resetBillsTableState],
-  );
+  // useEffect(
+  //   () => () => {
+  //     resetBillsTableState();
+  //   },
+  //   [resetBillsTableState],
+  // );
 
   return (
     <BillsListProvider

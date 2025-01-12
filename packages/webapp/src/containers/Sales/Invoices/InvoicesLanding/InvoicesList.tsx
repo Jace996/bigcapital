@@ -27,12 +27,12 @@ function InvoicesList({
   resetInvoicesTableState,
 }) {
   // Resets the invoices table state once the page unmount.
-  React.useEffect(
-    () => () => {
-      resetInvoicesTableState();
-    },
-    [resetInvoicesTableState],
-  );
+  // React.useEffect(
+  //   () => () => {
+  //     resetInvoicesTableState();
+  //   },
+  //   [resetInvoicesTableState],
+  // );
 
   return (
     <InvoicesListProvider

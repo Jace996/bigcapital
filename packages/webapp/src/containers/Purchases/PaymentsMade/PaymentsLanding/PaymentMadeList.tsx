@@ -25,12 +25,12 @@ function PaymentMadeList({
   resetPaymentMadesTableState,
 }) {
   // Resets the invoices table state once the page unmount.
-  React.useEffect(
-    () => () => {
-      resetPaymentMadesTableState();
-    },
-    [resetPaymentMadesTableState],
-  );
+  // React.useEffect(
+  //   () => () => {
+  //     resetPaymentMadesTableState();
+  //   },
+  //   [resetPaymentMadesTableState],
+  // );
 
   return (
     <PaymentMadesListProvider
