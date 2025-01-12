@@ -23,7 +23,7 @@ export default {
       relationKey: 'vendor',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     amount: {
       name: 'bill_payment.field.amount',

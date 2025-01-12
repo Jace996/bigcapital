@@ -19,7 +19,7 @@ export default {
       relationKey: 'customer',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     payment_date: {
       name: 'payment_receive.field.payment_date',

@@ -38,7 +38,7 @@ export default {
       relationKey: 'customer',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     estimate_date: {
       name: 'estimate.field.estimate_date',

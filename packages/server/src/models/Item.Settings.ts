@@ -110,7 +110,7 @@ export default {
       relationKey: 'category',
 
       relationEntityLabel: 'name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'name',
     },
     active: {
       name: 'item.field.active',

@@ -36,7 +36,7 @@ export default {
       relationKey: 'customer',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     credit_date: {
       name: 'credit_note.field.credit_note_date',

@@ -25,7 +25,7 @@ export default {
       relationKey: 'vendor',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     bill_number: {
       name: 'bill.field.bill_number',

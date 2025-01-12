@@ -35,7 +35,7 @@ export default {
       relationKey: 'vendor',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     amount: {
       name: 'vendor_credit.field.amount',

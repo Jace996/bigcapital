@@ -43,7 +43,7 @@ export default {
       relationKey: 'customer',
 
       relationEntityLabel: 'display_name',
-      relationEntityKey: 'id',
+      relationEntityKey: 'display_name',
     },
     receipt_date: {
       name: 'receipt.field.receipt_date',
