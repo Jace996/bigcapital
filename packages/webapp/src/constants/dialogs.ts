@@ -30,6 +30,7 @@ export enum DialogsName {
   SMSMessageForm = 'sms-message-form',
   RefundCreditNote = 'refund-credit-note',
   RefundVendorCredit = 'refund-vendor-credit',
+  VendorCreditPdfForm = 'vendor-credit-pdf-preview',
   ReconcileCreditNote = 'reconcile-credit-note',
   ReconcileVendorCredit = 'reconcile-vendor-credit',
   TransactionsLocking = 'locking-transactions',

@@ -23,6 +23,8 @@ import DeleteRefundVendorCredit from '@/services/Purchases/VendorCredits/RefundV
 import ListVendorCreditRefunds from '@/services/Purchases/VendorCredits/RefundVendorCredits/ListRefundVendorCredits';
 import OpenVendorCredit from '@/services/Purchases/VendorCredits/OpenVendorCredit';
 import GetRefundVendorCredit from '@/services/Purchases/VendorCredits/RefundVendorCredits/GetRefundVendorCredit';
+import { ACCEPT_TYPE } from '@/interfaces/Http';
+import GetVendorCreditPdf from '../../../services/Purchases/VendorCredits/GetVendorCreditPdf';
 
 @Service()
 export default class VendorCreditController extends BaseController {
@@ -62,6 +64,8 @@ export default class VendorCreditController extends BaseController {
   @Inject()
   getRefundCredit: GetRefundVendorCredit;
 
+  @Inject()
+  vendorCreditPdf: GetVendorCreditPdf;
   /**
    * Router constructor.
    */
@@ -189,6 +193,9 @@ export default class VendorCreditController extends BaseController {
       check('attachments').isArray().optional(),
       check('attachments.*.key').exists().isString(),
 
+      // Pdf template id.
+      check('pdf_template_id').optional({ nullable: true }).isNumeric().toInt(),
+
       // Discount.
       check('discount').optional({ nullable: true }).isNumeric().toFloat(),
       check('discount_type')
@@ -241,6 +248,9 @@ export default class VendorCreditController extends BaseController {
 
       check('attachments').isArray().optional(),
       check('attachments.*.key').exists().isString(),
+
+      // Pdf template id.
+      check('pdf_template_id').optional({ nullable: true }).isNumeric().toInt(),
 
       // Discount.
       check('discount').optional({ nullable: true }).isNumeric().toFloat(),
@@ -376,15 +386,31 @@ export default class VendorCreditController extends BaseController {
     const { tenantId } = req;
     const { id: billId } = req.params;
 
-    try {
+    const accept = this.accepts(req);
+    
+    const acceptType = accept.types([
+      ACCEPT_TYPE.APPLICATION_JSON,
+      ACCEPT_TYPE.APPLICATION_PDF,
+    ]);
+
+    if (ACCEPT_TYPE.APPLICATION_PDF === acceptType) {
+      const [pdfContent, filename] = await this.vendorCreditPdf.getVendorCreditPdf(
+        tenantId,
+        billId
+      );
+      res.set({
+        'Content-Type': 'application/pdf',
+        'Content-Length': pdfContent.length,
+        'Content-Disposition': `attachment; filename="${filename}"`,
+      });
+      res.send(pdfContent);
+    } else {
       const data = await this.getVendorCreditService.getVendorCredit(
         tenantId,
         billId
       );
 
       return res.status(200).send({ data });
-    } catch (error) {
-      next(error);
     }
   };
 

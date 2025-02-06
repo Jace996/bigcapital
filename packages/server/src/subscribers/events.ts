@@ -512,6 +512,8 @@ export default {
    * Vendor credit service.
    */
   vendorCredit: {
+    onPdfViewed: 'onVendorCreditPdfViewed',
+
     onCreate: 'onVendorCreditCreate',
     onCreating: 'onVendorCreditCreating',
     onCreated: 'onVendorCreditCreated',

@@ -37,6 +37,7 @@ export const defaultCreditNoteEntry = {
   quantity: '',
   description: '',
   amount: '',
+  pdf_template_id: '',
 };
 
 // Default Vendors Credit Note.

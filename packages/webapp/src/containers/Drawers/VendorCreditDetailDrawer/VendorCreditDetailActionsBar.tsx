@@ -58,6 +58,10 @@ function VendorCreditDetailActionsBar({
     openDialog('refund-vendor-credit', { vendorCreditId });
   };
 
+  const handlePrintVendorCredit = () => {
+    openDialog('vendor-credit-pdf-preview', { vendorCreditId });
+  };
+
   const handleReconcileVendorCredit = () => {
     openDialog('reconcile-vendor-credit', { vendorCreditId });
   };
@@ -81,6 +85,16 @@ function VendorCreditDetailActionsBar({
               icon={<Icon icon="arrow-downward" iconSize={18} />}
               text={<T id={'refund'} />}
               onClick={handleRefundVendorCredit}
+            />
+          </If>
+        </Can>
+        <Can I={VendorCreditAction.Edit} a={AbilitySubject.VendorCredit}>
+          <If condition={!vendorCredit.is_closed && !vendorCredit.is_draft}>
+            <Button
+              className={Classes.MINIMAL}
+              icon={<Icon icon="print-16" iconSize={18} />}
+              text={<T id={'print'} />}
+              onClick={handlePrintVendorCredit}
             />
           </If>
         </Can>

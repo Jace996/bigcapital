@@ -80,3 +80,71 @@ export const VendorCreditsSampleData = [
     Rate: 100,
   },
 ];
+
+export const defaultVendorCreditBrandingAttributes = {
+  // # Colors
+  primaryColor: '',
+  secondaryColor: '',
+  
+  // # Company logo
+  showCompanyLogo: true,
+  companyLogoKey: '',
+  companyLogoUri: '',
+
+  // # Company name
+  companyName: 'Bigcapital Technology, Inc.',
+
+  // # Vendor address
+  showVendorAddress: true,
+  vendorAddress: '',
+
+  // # Company address
+  showCompanyAddress: true,
+  companyAddress: '',
+  billedToLabel: 'Billed To',
+
+  // Total
+  total: '$1000.00',
+  totalLabel: 'Total',
+  showTotal: true,
+
+  // Subtotal
+  subtotal: '1000/00',
+  subtotalLabel: 'Subtotal',
+  showSubtotal: true,
+
+  // Vendor note
+  showVendorNote: true,
+  vendorNote:
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+  vendorNoteLabel: 'Vendor Note',
+
+  // Terms & conditions
+  showTermsConditions: true,
+  termsConditions:
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+  termsConditionsLabel: 'Terms & Conditions',
+
+  lines: [
+    {
+      item: 'Simply dummy text',
+      description: 'Simply dummy text of the printing and typesetting',
+      rate: '1',
+      quantity: '1000',
+      total: '$1000.00',
+    },
+  ],
+  // Vendor credit number.
+  showCreditNoteNumber: true,
+  vendorCreditNumberLabel: 'Credit Number',
+  vendorCreditNumber: '346D3D40-0001',
+
+  // Vendor credit date.
+  vendorCreditDate: 'September 3, 2024',
+  showCreditNoteDate: true,
+  vendorCreditDateLabel: 'Credit Date',
+  vendorCreditReferenceLabel: 'Reference',
+  vendorCreditReference: 'Reference',
+  vendorCreditRemainingLabel: 'Credit Remaining',
+  vendorCreditRemaining: 'Reference',
+};

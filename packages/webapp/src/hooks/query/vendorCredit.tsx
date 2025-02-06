@@ -4,6 +4,7 @@ import { useRequestQuery } from '../useQueryRequest';
 import { transformPagination } from '@/utils';
 import useApiRequest from '../useRequest';
 import t from './types';
+import { useRequestPdf } from '../useRequestPdf';
 
 const commonInvalidateQueries = (queryClient) => {
   // Invalidate vendor credit.
@@ -364,4 +365,15 @@ export function useRefundVendorCreditTransaction(id, props, requestProps) {
       ...props,
     },
   );
+}
+
+/**
+ * Retrieve the vendor credit pdf document data,
+ */
+export function usePdfVendorCredit(vendorCreditId) {
+  return useRequestPdf({ url: `purchases/vendor-credit/${vendorCreditId}` });
+}
+
+export interface VendorCreditStateResponse {
+  defaultTemplateId: number;
 }

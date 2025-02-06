@@ -247,3 +247,61 @@ export interface IVendorCreditAppliedBill {
   amount: number;
   vendorCreditId: number;
 }
+
+export interface VendorCreditPdfTemplateAttributes {
+  // # Primary color
+  primaryColor: string;
+  secondaryColor: string;
+
+  // # Company logo
+  showCompanyLogo: boolean;
+  companyLogo: string;
+
+  // # Company name
+  companyName: string;
+
+  // # Vendor Address
+  showVendorAddress: boolean;
+  vendorAddress: string;
+
+  // # Company address
+  showCompanyAddress: boolean;
+  companyAddress: string;
+  billedToLabel: string;
+
+  total: string;
+  totalLabel: string;
+  showTotal: boolean;
+
+  subtotal: string;
+  subtotalLabel: string;
+  showSubtotal: boolean;
+
+  showVendorNote: boolean;
+  vendorNote: string;
+  vendorNoteLabel: string;
+
+  showTermsConditions: boolean;
+  termsConditions: string;
+  termsConditionsLabel: string;
+
+  lines: Array<{
+    item: string;
+    description: string;
+    rate: string;
+    quantity: string;
+    total: string;
+  }>;
+
+  showVendorCreditNumber: boolean;
+  vendorCreditNumberLabel: string;
+  vendorCreditNumber: string;
+
+  vendorCreditDate: string;
+  showVendorCreditDate: boolean;
+  vendorCreditDateLabel: string;
+  vendorCreditReferenceLabel: string;
+  vendorCreditReference: string;
+  vendorCreditRemainingLabel: string;
+  vendorCreditRemaining: string;
+}

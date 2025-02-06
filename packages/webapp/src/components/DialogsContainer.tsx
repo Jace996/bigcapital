@@ -28,6 +28,7 @@ import LockingTransactionsDialog from '@/containers/Dialogs/LockingTransactionsD
 import UnlockingTransactionsDialog from '@/containers/Dialogs/UnlockingTransactionsDialog';
 import UnlockingPartialTransactionsDialog from '@/containers/Dialogs/UnlockingPartialTransactionsDialog';
 import CreditNotePdfPreviewDialog from '@/containers/Dialogs/CreditNotePdfPreviewDialog';
+import VendorCreditPdfPreviewDialog from '@/containers/Dialogs/VendorCreditPdfPreviewDialog';
 import PaymentReceivePdfPreviewDialog from '@/containers/Dialogs/PaymentReceivePdfPreviewDialog';
 import BillPaymentPdfPreviewDialog from '@/containers/Dialogs/BillPaymentPdfPreviewDialog';
 import WarehouseFormDialog from '@/containers/Dialogs/WarehouseFormDialog';
@@ -111,6 +112,7 @@ export default function DialogsContainer() {
         dialogName={DialogsName.PartialTransactionsUnlocking}
       />
       <CreditNotePdfPreviewDialog dialogName={DialogsName.CreditNotePdfForm} />
+      <VendorCreditPdfPreviewDialog dialogName={DialogsName.VendorCreditPdfForm} />
       <PaymentReceivePdfPreviewDialog dialogName={DialogsName.PaymentPdfForm} />
       <BillPaymentPdfPreviewDialog dialogName={DialogsName.PaymentMadePdfForm} />
       <WarehouseFormDialog dialogName={DialogsName.WarehouseForm} />
