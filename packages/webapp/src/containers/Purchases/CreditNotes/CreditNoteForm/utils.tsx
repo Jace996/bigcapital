@@ -37,7 +37,6 @@ export const defaultCreditNoteEntry = {
   quantity: '',
   description: '',
   amount: '',
-  pdf_template_id: '',
 };
 
 // Default Vendors Credit Note.
@@ -58,6 +57,7 @@ export const defaultVendorsCreditNote = {
   discount: '',
   discount_type: 'amount',
   adjustment: '',
+  pdf_template_id: '',
 };
 
 /**
