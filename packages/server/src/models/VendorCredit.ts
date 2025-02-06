@@ -262,6 +262,7 @@ export default class VendorCredit extends mixin(TenantModel, [
     const Branch = require('models/Branch');
     const Document = require('models/Document');
     const Warehouse = require('models/Warehouse');
+    const { PdfTemplate } = require('models/PdfTemplate');
 
     return {
       vendor: {
@@ -329,6 +330,17 @@ export default class VendorCredit extends mixin(TenantModel, [
         },
         filter(query) {
           query.where('model_ref', 'VendorCredit');
+        },
+      },
+       /**
+       * Vendor credit may belongs to pdf branding template.
+       */
+       pdfTemplate: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: PdfTemplate,
+        join: {
+          from: 'vendor_credits.pdfTemplateId',
+          to: 'pdf_templates.id',
         },
       },
     };
